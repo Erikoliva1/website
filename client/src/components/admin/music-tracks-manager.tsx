@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Plus, Edit, Trash2, Music } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
+import { type MusicTrack } from "@shared/schema";
 
 const musicTrackSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -34,7 +35,7 @@ export default function MusicTracksManager() {
   const [editingTrack, setEditingTrack] = useState<any>(null);
   const queryClient = useQueryClient();
 
-  const { data: tracks = [], isLoading } = useQuery({
+  const { data: tracks = [], isLoading } = useQuery<MusicTrack[]>({
     queryKey: ["/api/music-tracks"],
   });
 
@@ -247,7 +248,7 @@ export default function MusicTracksManager() {
       </div>
 
       <div className="grid gap-4">
-        {tracks.map((track: any) => (
+        {tracks.map((track) => (
           <Card key={track.id}>
             <CardHeader className="pb-2">
               <div className="flex justify-between items-start">

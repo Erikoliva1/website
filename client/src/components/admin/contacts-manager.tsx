@@ -4,9 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MessageSquare, Mail, User } from "lucide-react";
 import { format } from "date-fns";
+import type { Contact } from "@shared/schema";
 
 export default function ContactsManager() {
-  const { data: contacts = [], isLoading } = useQuery({
+  const { data: contacts = [], isLoading } = useQuery<Contact[]>({
     queryKey: ["/api/admin/contacts"],
   });
 
@@ -24,7 +25,7 @@ export default function ContactsManager() {
       </div>
 
       <div className="grid gap-4">
-        {contacts.map((contact: any) => (
+        {contacts.map((contact) => (
           <Card key={contact.id}>
             <CardHeader className="pb-2">
               <div className="flex justify-between items-start">
