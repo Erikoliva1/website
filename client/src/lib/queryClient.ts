@@ -12,9 +12,9 @@ export async function apiRequest(
   options: RequestInit = {}
 ): Promise<any> {
   const token = localStorage.getItem("adminToken");
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...options.headers,
+    ...(options.headers as Record<string, string> || {}),
   };
   
   if (token) {
