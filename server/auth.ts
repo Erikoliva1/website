@@ -49,8 +49,13 @@ export function createDefaultAdmin() {
       process.exit(1);
     }
     
-    if (password.length < 8) {
-      console.error('ERROR: DEFAULT_ADMIN_PASSWORD must be at least 8 characters long');
+    if (username === 'admin') {
+      console.error('ERROR: DEFAULT_ADMIN_USERNAME cannot be "admin" in production for security');
+      process.exit(1);
+    }
+    
+    if (password.length < 12) {
+      console.error('ERROR: DEFAULT_ADMIN_PASSWORD must be at least 12 characters long');
       process.exit(1);
     }
     
