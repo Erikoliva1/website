@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
-import logoImage from "@assets/Gemini_Generated_Image_usmx9pusmx9pusmx-removebg-preview_1757692023026.png";
+import logoImage from "@assets/Gemini_Generated_Image_usmx9pusmx9pusmx-removebg-preview.png";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,7 +55,7 @@ export default function Navbar() {
         </div>
         
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
             <button
               key={link.href}
@@ -65,20 +66,24 @@ export default function Navbar() {
               {link.label}
             </button>
           ))}
+          <ThemeToggle />
         </div>
         
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden text-foreground"
-          data-testid="mobile-menu-toggle"
-        >
-          {isMobileMenuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <Menu className="w-6 h-6" />
-          )}
-        </button>
+        {/* Mobile Menu */}
+        <div className="md:hidden flex items-center space-x-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-foreground"
+            data-testid="mobile-menu-toggle"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
+        </div>
       </div>
       
       {/* Mobile Menu */}

@@ -11,17 +11,17 @@ export default function EventsSection() {
   });
 
   // Helper function to format date
-  const formatEventDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+  const formatEventDate = (date: Date | string) => {
+    const dateObj = date instanceof Date ? date : new Date(date);
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    const month = dateObj.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
     return { day, month };
   };
 
   // Helper function to format time
-  const formatEventTime = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleTimeString('en-US', { 
+  const formatEventTime = (date: Date | string) => {
+    const dateObj = date instanceof Date ? date : new Date(date);
+    return dateObj.toLocaleTimeString('en-US', { 
       hour: 'numeric', 
       minute: '2-digit', 
       hour12: true 
@@ -100,8 +100,8 @@ export default function EventsSection() {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {events.map((event) => {
-              const dateInfo = formatEventDate(event.date);
-              const timeInfo = formatEventTime(event.date);
+              const dateInfo = formatEventDate(event.eventDate);
+              const timeInfo = formatEventTime(event.eventDate);
               
               return (
                 <div key={event.id} className="glass-effect p-6 rounded-xl card-3d" data-testid={`event-${event.id}`}>
@@ -130,9 +130,9 @@ export default function EventsSection() {
                       <Clock className="h-4 w-4 mr-1" />
                       <span>{timeInfo}</span>
                     </div>
-                    {event.ticketPrice && (
+                    {event.price && (
                       <Badge variant="secondary">
-                        ${event.ticketPrice}
+                        {event.price}
                       </Badge>
                     )}
                   </div>

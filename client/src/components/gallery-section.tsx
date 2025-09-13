@@ -85,10 +85,10 @@ export default function GallerySection() {
               <div
                 key={image.id}
                 className="gallery-item cursor-pointer"
-                onClick={() => setSelectedImage(image.url)}
+                onClick={() => setSelectedImage(image.imageUrl)}
                 data-testid={`gallery-item-${image.id}`}
               >
-                <img src={image.url} alt={image.caption || 'Gallery image'} />
+                <img src={image.imageUrl} alt={image.alt || 'Gallery image'} />
                 <div className="gallery-overlay">
                   <Expand className="text-accent text-2xl w-8 h-8" />
                 </div>

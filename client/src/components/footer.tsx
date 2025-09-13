@@ -81,7 +81,7 @@ export default function Footer() {
         
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-muted-foreground">
-            &copy; 2024 Prabhat Yadav. All rights reserved. Made with ❤️ and music.
+            &copy; 2025 Prabhat Yadav. All rights reserved. Made with ❤️ and music.
           </p>
         </div>
       </div>

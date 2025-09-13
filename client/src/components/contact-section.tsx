@@ -18,6 +18,10 @@ export default function ContactSection() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  
+  // Check if ReCAPTCHA is enabled
+  const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+  const isRecaptchaEnabled = Boolean(recaptchaSiteKey);
 
   const form = useForm<InsertContact>({
     resolver: zodResolver(insertContactSchema),
@@ -181,20 +185,22 @@ export default function ContactSection() {
                   )}
                 />
                 
-                <div className="flex justify-center" data-testid="recaptcha-container">
+                {isRecaptchaEnabled && (
+                  <div className="flex justify-center" data-testid="recaptcha-container">
                   <ReCAPTCHA
                     ref={recaptchaRef}
-                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                    sitekey={recaptchaSiteKey!}
                     onChange={handleRecaptchaChange}
                     onExpired={handleRecaptchaExpired}
                     onError={handleRecaptchaError}
                     theme="dark"
                   />
                 </div>
+                )}
                 
                 <button
                   type="submit"
-                  disabled={isSubmitting || !recaptchaToken}
+                  disabled={isSubmitting || (isRecaptchaEnabled && !recaptchaToken)}
                   className="btn-gold w-full py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   data-testid="submit-button"
                 >
