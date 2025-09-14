@@ -10,7 +10,7 @@
     "dev": "tsx server/index.ts",
     "build": "vite build",
     "preview": "vite preview --host",
-    "start": "node server-production.js",
+    "start": "NODE_ENV=production tsx server/index.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
