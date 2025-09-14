@@ -68,6 +68,9 @@ export class MemStorage implements IStorage {
     this.youtubeVideos = new Map();
     this.galleryImages = new Map();
     this.events = new Map();
+    
+    // Initialize with sample data
+    this.initializeSampleGalleryImages();
   }
 
   // Contacts
@@ -287,6 +290,83 @@ export class MemStorage implements IStorage {
 
   async deleteEvent(id: string): Promise<boolean> {
     return this.events.delete(id);
+  }
+
+  // Private method to initialize sample gallery images
+  private initializeSampleGalleryImages(): void {
+    const sampleImages: GalleryImage[] = [
+      {
+        id: randomUUID(),
+        title: "Live Performance at Mumbai Concert",
+        imageUrl: "https://i.ibb.co/qMB3nGN/prabhat-live-mumbai.jpg",
+        alt: "Prabhat Yadav performing live on stage at Mumbai concert hall",
+        category: "Performance",
+        isActive: true,
+        sortOrder: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: randomUUID(),
+        title: "Studio Recording Session",
+        imageUrl: "https://i.ibb.co/7QpYvZM/prabhat-studio-recording.jpg",
+        alt: "Prabhat Yadav in professional recording studio with headphones",
+        category: "Studio",
+        isActive: true,
+        sortOrder: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: randomUUID(),
+        title: "Portrait Photoshoot",
+        imageUrl: "https://i.ibb.co/8xvKpqT/prabhat-portrait.jpg",
+        alt: "Professional portrait of musician Prabhat Yadav",
+        category: "Portrait",
+        isActive: true,
+        sortOrder: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: randomUUID(),
+        title: "Acoustic Performance",
+        imageUrl: "https://i.ibb.co/2hKrBVN/prabhat-acoustic.jpg",
+        alt: "Prabhat Yadav playing acoustic guitar in intimate setting",
+        category: "Performance",
+        isActive: true,
+        sortOrder: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: randomUUID(),
+        title: "Behind the Scenes",
+        imageUrl: "https://i.ibb.co/1sKpYxW/prabhat-backstage.jpg",
+        alt: "Candid shot of Prabhat Yadav preparing backstage before performance",
+        category: "Backstage",
+        isActive: true,
+        sortOrder: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: randomUUID(),
+        title: "Festival Performance",
+        imageUrl: "https://i.ibb.co/vXQp8mT/prabhat-festival.jpg",
+        alt: "Prabhat Yadav performing at outdoor music festival",
+        category: "Performance",
+        isActive: true,
+        sortOrder: 6,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ];
+
+    // Add each sample image to the Map
+    sampleImages.forEach(image => {
+      this.galleryImages.set(image.id, image);
+    });
   }
 }
 
