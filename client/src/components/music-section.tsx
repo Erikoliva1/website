@@ -17,8 +17,11 @@ export default function MusicSection() {
     queryKey: ["/api/youtube-videos"],
   });
 
-  // Group tracks by language (normalized to lowercase)
-  const tracksByLanguage = musicTracks.reduce((acc: Record<string, MusicTrack[]>, track: MusicTrack) => {
+  // Filter tracks for audio section (only those with Spotify)
+  const audioTracks = musicTracks.filter(track => track.spotifyId);
+  
+  // Group audio tracks by language (normalized to lowercase)
+  const audioTracksByLanguage = audioTracks.reduce((acc: Record<string, MusicTrack[]>, track: MusicTrack) => {
     const language = track.language.toLowerCase().trim();
     if (!acc[language]) {
       acc[language] = [];
@@ -27,8 +30,29 @@ export default function MusicSection() {
     return acc;
   }, {});
 
-  const renderMusicCollection = (language: string, tracks: MusicTrack[]) => (
-    <div className="space-y-6" data-testid={`music-collection-${language.toLowerCase()}`}>
+  // Combine all YouTube content for video section
+  const videoContent = [
+    // Music tracks that have YouTube videos
+    ...musicTracks.filter(track => track.youtubeId).map(track => ({
+      id: track.id,
+      youtubeId: track.youtubeId!,
+      title: track.title,
+      description: track.description,
+      type: 'track' as const,
+      artist: track.artist
+    })),
+    // Standalone YouTube videos
+    ...youtubeVideos.map(video => ({
+      id: video.id,
+      youtubeId: video.youtubeId,
+      title: video.title,
+      description: video.description,
+      type: 'video' as const
+    }))
+  ];
+
+  const renderAudioCollection = (language: string, tracks: MusicTrack[]) => (
+    <div className="space-y-6" data-testid={`audio-collection-${language.toLowerCase()}`}>
       <div className="flex items-center mb-4">
         <Music className="text-accent text-xl mr-3 w-6 h-6" />
         <h3 className="font-display text-xl font-semibold">{language} Collection</h3>
@@ -43,20 +67,10 @@ export default function MusicSection() {
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center justify-between">
                 <span>{track.title}</span>
-                <div className="flex gap-2">
-                  {track.spotifyId && (
-                    <Badge variant="outline" className="text-green-600">
-                      <Music className="h-3 w-3 mr-1" />
-                      Spotify
-                    </Badge>
-                  )}
-                  {track.youtubeId && (
-                    <Badge variant="outline" className="text-red-600">
-                      <Video className="h-3 w-3 mr-1" />
-                      YouTube
-                    </Badge>
-                  )}
-                </div>
+                <Badge variant="outline" className="text-green-600">
+                  <Music className="h-3 w-3 mr-1" />
+                  Spotify
+                </Badge>
               </CardTitle>
               <p className="text-sm text-muted-foreground">by {track.artist}</p>
               {track.description && (
@@ -64,28 +78,12 @@ export default function MusicSection() {
               )}
             </CardHeader>
             
-            <CardContent className="space-y-4">
-              {track.spotifyId && (
-                <SpotifyPlayer
-                  trackId={track.spotifyId}
-                  title={track.title}
-                  artist={track.artist}
-                />
-              )}
-              
-              {track.youtubeId && (
-                <YouTubePlayer
-                  videoId={track.youtubeId}
-                  title={track.title}
-                />
-              )}
-              
-              {!track.spotifyId && !track.youtubeId && (
-                <div className="text-center py-8 text-muted-foreground">
-                  <Music className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                  <p>Audio coming soon</p>
-                </div>
-              )}
+            <CardContent>
+              <SpotifyPlayer
+                trackId={track.spotifyId!}
+                title={track.title}
+                artist={track.artist}
+              />
             </CardContent>
           </Card>
         ))}
@@ -93,17 +91,56 @@ export default function MusicSection() {
     </div>
   );
 
-  const renderYouTubeVideos = () => (
-    <div className="space-y-6" data-testid="youtube-videos-section">
+  const renderAllAudioTracks = () => {
+    const languages = Object.keys(audioTracksByLanguage);
+    
+    if (languages.length === 0) {
+      return (
+        <Card>
+          <CardContent className="text-center py-8">
+            <Music className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+            <p className="text-muted-foreground">
+              No audio tracks available yet.
+            </p>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    if (languages.length === 1) {
+      return renderAudioCollection(languages[0], audioTracksByLanguage[languages[0]]);
+    }
+
+    return (
+      <Tabs defaultValue={languages[0]} className="w-full">
+        <TabsList className="grid w-full grid-cols-auto justify-center mb-8">
+          {languages.map((language) => (
+            <TabsTrigger key={language} value={language} className="capitalize">
+              {language}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        
+        {languages.map((language) => (
+          <TabsContent key={language} value={language} className="mt-6">
+            {renderAudioCollection(language, audioTracksByLanguage[language])}
+          </TabsContent>
+        ))}
+      </Tabs>
+    );
+  };
+
+  const renderMusicVideos = () => (
+    <div className="space-y-6" data-testid="music-videos-section">
       <div className="flex items-center mb-4">
         <Video className="text-accent text-xl mr-3 w-6 h-6" />
         <h3 className="font-display text-xl font-semibold">Music Videos</h3>
         <Badge variant="secondary" className="ml-2">
-          {youtubeVideos.length} videos
+          {videoContent.length} videos
         </Badge>
       </div>
       
-      {youtubeVideos.length === 0 ? (
+      {videoContent.length === 0 ? (
         <Card>
           <CardContent className="text-center py-8">
             <Video className="h-12 w-12 mx-auto text-gray-400 mb-4" />
@@ -114,7 +151,7 @@ export default function MusicSection() {
         </Card>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {youtubeVideos.map((video: YoutubeVideo) => (
+          {videoContent.map((video) => (
             <Card key={video.id} className="overflow-hidden">
               <CardContent className="p-0">
                 <YouTubePlayer
@@ -122,7 +159,16 @@ export default function MusicSection() {
                   title={video.title}
                 />
                 <div className="p-4">
-                  <h4 className="font-semibold mb-2">{video.title}</h4>
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-semibold">{video.title}</h4>
+                    <Badge variant="outline" className="text-red-600">
+                      <Video className="h-3 w-3 mr-1" />
+                      {video.type === 'track' ? 'Music Track' : 'Music Video'}
+                    </Badge>
+                  </div>
+                  {'artist' in video && video.artist && (
+                    <p className="text-sm text-muted-foreground mb-2">by {video.artist}</p>
+                  )}
                   {video.description && (
                     <p className="text-sm text-muted-foreground">{video.description}</p>
                   )}
@@ -185,8 +231,9 @@ export default function MusicSection() {
     );
   }
 
-  const languages = Object.keys(tracksByLanguage);
-  const hasContent = musicTracks.length > 0 || youtubeVideos.length > 0;
+  const hasAudioContent = audioTracks.length > 0;
+  const hasVideoContent = videoContent.length > 0;
+  const hasContent = hasAudioContent || hasVideoContent;
 
   return (
     <section id="music" className="py-20" data-testid="music-section">
@@ -208,29 +255,31 @@ export default function MusicSection() {
             </CardContent>
           </Card>
         ) : (
-          <Tabs defaultValue={languages[0] || "videos"} className="w-full">
-            <TabsList className="grid w-full grid-cols-auto justify-center mb-8">
-              {languages.map((language) => (
-                <TabsTrigger key={language} value={language} className="capitalize">
-                  {language}
+          <Tabs defaultValue={hasAudioContent ? "audio" : "videos"} className="w-full">
+            <TabsList className="grid w-full grid-cols-2 justify-center mb-8 max-w-md mx-auto">
+              {hasAudioContent && (
+                <TabsTrigger value="audio">
+                  <Music className="h-4 w-4 mr-2" />
+                  Audio Tracks
                 </TabsTrigger>
-              ))}
-              {youtubeVideos.length > 0 && (
+              )}
+              {hasVideoContent && (
                 <TabsTrigger value="videos">
+                  <Video className="h-4 w-4 mr-2" />
                   Music Videos
                 </TabsTrigger>
               )}
             </TabsList>
             
-            {languages.map((language) => (
-              <TabsContent key={language} value={language} className="mt-6">
-                {renderMusicCollection(language, tracksByLanguage[language])}
+            {hasAudioContent && (
+              <TabsContent value="audio" className="mt-6">
+                {renderAllAudioTracks()}
               </TabsContent>
-            ))}
+            )}
             
-            {youtubeVideos.length > 0 && (
+            {hasVideoContent && (
               <TabsContent value="videos" className="mt-6">
-                {renderYouTubeVideos()}
+                {renderMusicVideos()}
               </TabsContent>
             )}
           </Tabs>
