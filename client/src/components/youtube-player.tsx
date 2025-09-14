@@ -18,7 +18,7 @@ export default function YouTubePlayer({ videoId, title, className = "" }: YouTub
   };
 
   return (
-    <div className={`relative aspect-video rounded-lg overflow-hidden bg-gray-900 ${className}`}>
+    <div className={`relative aspect-video rounded-lg overflow-hidden bg-muted ${className}`}>
       {!isLoaded ? (
         // Thumbnail with play button
         <div className="relative w-full h-full group cursor-pointer" onClick={handlePlay}>
@@ -32,9 +32,9 @@ export default function YouTubePlayer({ videoId, title, className = "" }: YouTub
               target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
             }}
           />
-          <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-30 transition-all duration-300">
-            <div className="bg-red-600 rounded-full p-4 group-hover:scale-110 transition-transform duration-300">
-              <Play className="w-8 h-8 text-white fill-white ml-1" />
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition-all duration-300">
+            <div className="bg-destructive rounded-full p-4 group-hover:scale-110 transition-transform duration-300">
+              <Play className="w-8 h-8 text-destructive-foreground fill-destructive-foreground ml-1" />
             </div>
           </div>
           <div className="absolute bottom-4 left-4 text-white">
