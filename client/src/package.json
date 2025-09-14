@@ -1,0 +1,29 @@
+# Set up nodenv properly first
+eval "$(nodenv init -)"
+nodenv local 20
+nodenv rehash
+
+# Copy our simple app
+cp app-heliohost.js app.js
+
+# Create simple package.json for HelioHost
+cat > package.json << 'EOF'
+{
+  "name": "prabhat-music-website", 
+  "version": "1.0.0",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
+EOF
+
+# Install dependencies 
+npm install
+
+# Test it
+npm start
