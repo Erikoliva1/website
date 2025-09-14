@@ -363,7 +363,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Events management
   app.post("/api/admin/events", requireAuth, async (req, res) => {
     try {
-      const eventData = insertEventSchema.parse(req.body);
+      // Parse eventDate string to Date object if it's a string
+      const requestBody = { ...req.body };
+      if (requestBody.eventDate && typeof requestBody.eventDate === 'string') {
+        requestBody.eventDate = new Date(requestBody.eventDate);
+      }
+      
+      const eventData = insertEventSchema.parse(requestBody);
       const event = await storage.createEvent(eventData);
       res.json(event);
     } catch (error) {
@@ -379,7 +385,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.put("/api/admin/events/:id", requireAuth, async (req, res) => {
     try {
       const { id } = req.params;
-      const updateData = insertEventSchema.partial().parse(req.body);
+      // Parse eventDate string to Date object if it's a string
+      const requestBody = { ...req.body };
+      if (requestBody.eventDate && typeof requestBody.eventDate === 'string') {
+        requestBody.eventDate = new Date(requestBody.eventDate);
+      }
+      
+      const updateData = insertEventSchema.partial().parse(requestBody);
       const event = await storage.updateEvent(id, updateData);
       if (!event) {
         res.status(404).json({ message: "Event not found" });
