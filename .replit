@@ -18,6 +18,10 @@ externalPort = 80
 localPort = 33155
 externalPort = 3000
 
+[[ports]]
+localPort = 39695
+externalPort = 3001
+
 [env]
 PORT = "5000"
 
@@ -44,3 +48,4 @@ waitForPort = 5000
 
 [agent]
 integrations = ["spotify:1.0.0"]
+expertMode = true
