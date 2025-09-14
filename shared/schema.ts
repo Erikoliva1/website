@@ -11,12 +11,11 @@ export const contacts = pgTable("contacts", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-export const insertContactSchema = createInsertSchema(contacts).pick({
-  name: true,
-  email: true,
-  message: true,
-}).extend({
-  recaptchaToken: z.string().min(1, "Please complete the reCAPTCHA verification"),
+export const insertContactSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Please enter a valid email address"),
+  message: z.string().min(1, "Message is required"),
+  recaptchaToken: z.string().default(""),
 });
 
 // Type for storage - without recaptchaToken (only used for verification)

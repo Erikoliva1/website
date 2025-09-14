@@ -81,13 +81,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const contactData = insertContactSchema.parse(req.body);
       
-      // Verify reCAPTCHA token
-      const isValidRecaptcha = await verifyRecaptcha(contactData.recaptchaToken);
-      if (!isValidRecaptcha) {
+      // Verify reCAPTCHA token if provided
+      if (contactData.recaptchaToken) {
+        const isValidRecaptcha = await verifyRecaptcha(contactData.recaptchaToken);
+        if (!isValidRecaptcha) {
         res.status(400).json({ 
           message: "reCAPTCHA verification failed. Please try again." 
         });
         return;
+      }
       }
       
       // Remove recaptchaToken before storing (it's only used for verification)
