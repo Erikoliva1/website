@@ -36,18 +36,18 @@ export default function ContactsManager() {
                     <User className="h-4 w-4" />
                     {contact.name}
                   </CardTitle>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                  <p className="text-sm text-muted-foreground flex items-center gap-2">
                     <Mail className="h-4 w-4" />
                     {contact.email}
                   </p>
                 </div>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-muted-foreground">
                   {format(new Date(contact.createdAt), "MMM dd, yyyy 'at' HH:mm")}
                 </span>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+              <div className="bg-muted rounded-lg p-4">
                 <p className="text-sm whitespace-pre-wrap">{contact.message}</p>
               </div>
             </CardContent>
@@ -56,8 +56,8 @@ export default function ContactsManager() {
         {contacts.length === 0 && (
           <Card>
             <CardContent className="text-center py-8">
-              <MessageSquare className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">
+              <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <p className="text-muted-foreground">
                 No contact messages yet.
               </p>
             </CardContent>

@@ -119,8 +119,8 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
             </Button>
           </form>
           
-          <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="mt-6 p-4 bg-muted rounded-lg">
+            <p className="text-sm text-muted-foreground">
               <strong>Default credentials:</strong><br />
               Username: admin<br />
               Password: admin123
