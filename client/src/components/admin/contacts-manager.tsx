@@ -4,11 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MessageSquare, Mail, User } from "lucide-react";
 import { format } from "date-fns";
+import { apiRequest } from "@/lib/queryClient";
 import type { Contact } from "@shared/schema";
 
 export default function ContactsManager() {
   const { data: contacts = [], isLoading } = useQuery<Contact[]>({
     queryKey: ["/api/admin/contacts"],
+    queryFn: () => apiRequest("/api/admin/contacts"),
   });
 
   if (isLoading) {
