@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,22 +12,9 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Plus, Edit, Trash2, Music } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
-import { type MusicTrack } from "@shared/schema";
+import { type MusicTrack, insertMusicTrackSchema, type InsertMusicTrack } from "@shared/schema";
 
-const musicTrackSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  artist: z.string().min(1, "Artist is required"),
-  language: z.string().min(1, "Language is required"),
-  spotifyId: z.string().min(1, "Spotify Track ID is required"),
-  youtubeId: z.string().optional(),
-  description: z.string().optional(),
-  duration: z.number().optional(),
-  releaseDate: z.string().optional(),
-  isActive: z.boolean().default(true),
-  sortOrder: z.number().default(0),
-});
-
-type MusicTrackForm = z.infer<typeof musicTrackSchema>;
+type MusicTrackForm = InsertMusicTrack;
 
 export default function MusicTracksManager() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -84,7 +70,7 @@ export default function MusicTracksManager() {
     setValue,
     watch,
   } = useForm<MusicTrackForm>({
-    resolver: zodResolver(musicTrackSchema),
+    resolver: zodResolver(insertMusicTrackSchema),
     defaultValues: {
       title: "",
       artist: "Prabhat Yadav",
