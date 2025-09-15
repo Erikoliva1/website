@@ -106,24 +106,41 @@ export const insertMusicTrackSchema = createInsertSchema(musicTracks).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
+}).extend({
+  title: z.string().min(1, "Title is required"),
+  artist: z.string().min(1, "Artist is required"),
+  language: z.string().min(1, "Language is required"),
+  spotifyId: z.string().min(1, "Spotify ID is required").optional(),
 });
 
 export const insertYoutubeVideoSchema = createInsertSchema(youtubeVideos).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
+}).extend({
+  title: z.string().min(1, "Title is required"),
+  youtubeId: z.string().min(1, "YouTube ID is required"),
 });
 
 export const insertGalleryImageSchema = createInsertSchema(galleryImages).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
+}).extend({
+  title: z.string().min(1, "Title is required"),
+  imageUrl: z.string().min(1, "Image URL is required"),
+  alt: z.string().min(1, "Alt text is required"),
 });
 
 export const insertEventSchema = createInsertSchema(events).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
+}).extend({
+  title: z.string().min(1, "Title is required"),
+  venue: z.string().min(1, "Venue is required"),
+  address: z.string().min(1, "Address is required"),
+  eventDate: z.coerce.date(),
 });
 
 // Admin login schema
