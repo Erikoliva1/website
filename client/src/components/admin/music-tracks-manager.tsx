@@ -19,7 +19,7 @@ const musicTrackSchema = z.object({
   title: z.string().min(1, "Title is required"),
   artist: z.string().min(1, "Artist is required"),
   language: z.string().min(1, "Language is required"),
-  spotifyId: z.string().optional(),
+  spotifyId: z.string().min(1, "Spotify Track ID is required"),
   youtubeId: z.string().optional(),
   description: z.string().optional(),
   duration: z.number().optional(),
