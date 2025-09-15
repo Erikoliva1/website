@@ -14,9 +14,11 @@ export default function AboutSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="animate-slideUp">
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600" 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=85" 
               alt="Prabhat Yadav - Professional Portrait" 
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto card-3d"
+              loading="lazy"
+              decoding="async"
               data-testid="profile-image"
             />
           </div>
