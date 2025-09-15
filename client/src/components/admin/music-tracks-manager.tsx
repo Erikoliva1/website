@@ -183,13 +183,16 @@ export default function MusicTracksManager() {
               </div>
 
               <div>
-                <Label htmlFor="spotifyId">Spotify Track ID (optional)</Label>
+                <Label htmlFor="spotifyId">Spotify Track ID</Label>
                 <Input
                   id="spotifyId"
                   placeholder="e.g., 4uLU6hMCjMI75M1A2tKUQC"
                   {...register("spotifyId")}
                   data-testid="input-track-spotify"
                 />
+                {errors.spotifyId && (
+                  <p className="text-sm text-red-600">{errors.spotifyId.message}</p>
+                )}
               </div>
 
               <div>
