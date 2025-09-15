@@ -102,45 +102,47 @@ export const insertAdminSchema = createInsertSchema(admins).pick({
   passwordHash: true,
 });
 
-export const insertMusicTrackSchema = createInsertSchema(musicTracks).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-}).extend({
+export const insertMusicTrackSchema = z.object({
   title: z.string().min(1, "Title is required"),
   artist: z.string().min(1, "Artist is required"),
   language: z.string().min(1, "Language is required"),
   spotifyId: z.string().min(1, "Spotify ID is required"),
+  youtubeId: z.string().optional(),
+  description: z.string().optional(),
+  duration: z.number().optional(),
+  releaseDate: z.date().optional(),
+  isActive: z.boolean().default(true),
+  sortOrder: z.number().default(0),
 });
 
-export const insertYoutubeVideoSchema = createInsertSchema(youtubeVideos).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-}).extend({
+export const insertYoutubeVideoSchema = z.object({
   title: z.string().min(1, "Title is required"),
   youtubeId: z.string().min(1, "YouTube ID is required"),
+  description: z.string().optional(),
+  thumbnail: z.string().optional(),
+  category: z.string().default("Music"),
+  isActive: z.boolean().default(true),
+  sortOrder: z.number().default(0),
 });
 
-export const insertGalleryImageSchema = createInsertSchema(galleryImages).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-}).extend({
+export const insertGalleryImageSchema = z.object({
   title: z.string().min(1, "Title is required"),
   imageUrl: z.string().min(1, "Image URL is required"),
   alt: z.string().min(1, "Alt text is required"),
+  category: z.string().default("Performance"),
+  isActive: z.boolean().default(true),
+  sortOrder: z.number().default(0),
 });
 
-export const insertEventSchema = createInsertSchema(events).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-}).extend({
+export const insertEventSchema = z.object({
   title: z.string().min(1, "Title is required"),
+  description: z.string().optional(),
   venue: z.string().min(1, "Venue is required"),
   address: z.string().min(1, "Address is required"),
   eventDate: z.coerce.date(),
+  ticketUrl: z.string().optional(),
+  price: z.string().optional(),
+  isActive: z.boolean().default(true),
 });
 
 // Admin login schema
