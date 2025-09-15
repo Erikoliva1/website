@@ -120,7 +120,7 @@ export default function GalleryManager() {
               Add Image
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
                 {editingImage ? "Edit Image" : "Add Gallery Image"}

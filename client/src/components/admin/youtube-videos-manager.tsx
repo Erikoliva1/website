@@ -123,7 +123,7 @@ export default function YoutubeVideosManager() {
               Add Video
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
                 {editingVideo ? "Edit Video" : "Add YouTube Video"}
