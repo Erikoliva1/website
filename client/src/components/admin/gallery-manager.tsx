@@ -219,7 +219,7 @@ export default function GalleryManager() {
               <div className="flex justify-between items-start">
                 <div>
                   <CardTitle className="text-base">{image.title}</CardTitle>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     {image.imageUrl}
                   </p>
                   <Badge variant="secondary">{image.category}</Badge>
@@ -245,7 +245,7 @@ export default function GalleryManager() {
             </CardHeader>
             {image.alt && (
               <CardContent>
-                <p className="text-sm text-gray-600">Alt: {image.alt}</p>
+                <p className="text-sm text-muted-foreground">Alt: {image.alt}</p>
               </CardContent>
             )}
           </Card>
@@ -253,8 +253,8 @@ export default function GalleryManager() {
         {images.length === 0 && (
           <Card>
             <CardContent className="text-center py-8">
-              <Image className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">
+              <Image className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <p className="text-muted-foreground">
                 No gallery images yet. Add your first image to get started.
               </p>
             </CardContent>

@@ -73,7 +73,7 @@ export default function GallerySection() {
         {galleryImages.length === 0 ? (
           <Card className="max-w-md mx-auto">
             <CardContent className="text-center py-8">
-              <ImageIcon className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+              <ImageIcon className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
               <p className="text-muted-foreground">
                 Gallery images will be available soon.
               </p>

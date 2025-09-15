@@ -221,7 +221,7 @@ export default function YoutubeVideosManager() {
               <div className="flex justify-between items-start">
                 <div>
                   <CardTitle className="text-base">{video.title}</CardTitle>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     YouTube ID: {video.youtubeId}
                   </p>
                   <Badge variant="secondary">{video.category}</Badge>
@@ -247,7 +247,7 @@ export default function YoutubeVideosManager() {
             </CardHeader>
             {video.description && (
               <CardContent>
-                <p className="text-sm text-gray-600">{video.description}</p>
+                <p className="text-sm text-muted-foreground">{video.description}</p>
               </CardContent>
             )}
           </Card>
@@ -255,8 +255,8 @@ export default function YoutubeVideosManager() {
         {videos.length === 0 && (
           <Card>
             <CardContent className="text-center py-8">
-              <Video className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">
+              <Video className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <p className="text-muted-foreground">
                 No YouTube videos yet. Add your first video to get started.
               </p>
             </CardContent>

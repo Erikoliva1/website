@@ -258,7 +258,7 @@ export default function EventsManager() {
               <div className="flex justify-between items-start">
                 <div>
                   <CardTitle className="text-base">{event.title}</CardTitle>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     {event.venue} - {format(new Date(event.eventDate), "MMM dd, yyyy 'at' h:mm a")}
                   </p>
                   {event.price && (
@@ -286,9 +286,9 @@ export default function EventsManager() {
             </CardHeader>
             {event.description && (
               <CardContent>
-                <p className="text-sm text-gray-600">{event.description}</p>
+                <p className="text-sm text-muted-foreground">{event.description}</p>
                 {event.address && (
-                  <p className="text-sm text-gray-500 mt-1">{event.address}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{event.address}</p>
                 )}
               </CardContent>
             )}
@@ -297,8 +297,8 @@ export default function EventsManager() {
         {events.length === 0 && (
           <Card>
             <CardContent className="text-center py-8">
-              <Calendar className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">
+              <Calendar className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <p className="text-muted-foreground">
                 No events yet. Add your first event to get started.
               </p>
             </CardContent>

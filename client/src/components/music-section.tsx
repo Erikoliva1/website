@@ -98,7 +98,7 @@ export default function MusicSection() {
       return (
         <Card>
           <CardContent className="text-center py-8">
-            <Music className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+            <Music className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
             <p className="text-muted-foreground">
               No audio tracks available yet.
             </p>
@@ -143,7 +143,7 @@ export default function MusicSection() {
       {videoContent.length === 0 ? (
         <Card>
           <CardContent className="text-center py-8">
-            <Video className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+            <Video className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
             <p className="text-muted-foreground">
               No music videos available yet.
             </p>
@@ -248,7 +248,7 @@ export default function MusicSection() {
         {!hasContent ? (
           <Card className="max-w-md mx-auto">
             <CardContent className="text-center py-8">
-              <Music className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+              <Music className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
               <p className="text-muted-foreground">
                 Music content will be available soon.
               </p>

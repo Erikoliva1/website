@@ -254,7 +254,7 @@ export default function MusicTracksManager() {
               <div className="flex justify-between items-start">
                 <div>
                   <CardTitle className="text-base">{track.title}</CardTitle>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     by {track.artist}
                   </p>
                 </div>
@@ -295,7 +295,7 @@ export default function MusicTracksManager() {
                 {!track.isActive && <Badge variant="destructive">Inactive</Badge>}
               </div>
               {track.description && (
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   {track.description}
                 </p>
               )}
@@ -305,8 +305,8 @@ export default function MusicTracksManager() {
         {tracks.length === 0 && (
           <Card>
             <CardContent className="text-center py-8">
-              <Music className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">
+              <Music className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <p className="text-muted-foreground">
                 No music tracks yet. Add your first track to get started.
               </p>
             </CardContent>
