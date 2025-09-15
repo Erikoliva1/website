@@ -21,7 +21,7 @@ export default function HeroSection() {
         <h1 className="font-display text-5xl md:text-7xl font-bold mb-4 text-gradient leading-tight">
           Prabhat Yadav
         </h1>
-        <p className="text-xl md:text-2xl mb-8 text-muted-foreground font-light">
+        <p className="text-xl md:text-2xl mb-8 hero-subtitle font-light">
           Singer | Performer | Music Lover
         </p>
         <button 

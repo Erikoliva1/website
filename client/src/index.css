@@ -348,3 +348,143 @@
     }
   }
 }
+
+/* Additional custom styles for improved UI */
+.btn-gold {
+  @apply inline-flex items-center justify-center font-semibold transition-all duration-300;
+  background: linear-gradient(135deg, var(--accent-music), var(--accent-music-dark));
+  color: #000;
+  border: none;
+  text-decoration: none;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, var(--accent-music-dark), var(--accent-music));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+  color: #000;
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Light mode improvements for contact section headings */
+.light #contact h3 {
+  color: hsl(0 0% 6%) !important;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dark #contact h3 {
+  color: hsl(0 0% 98%) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced visibility for hero text in light mode */
+.hero-text {
+  color: white !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Better visibility for "Singer | Performer | Music Lover" */
+.hero-subtitle {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  font-weight: 400;
+}
+
+/* Improved glass effect for light mode */
+.light .glass-effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+}
+
+/* Fix about section scrolling visibility */
+#about {
+  z-index: 10;
+  position: relative;
+  background: var(--background);
+}
+
+/* Ensure proper contrast for events section */
+#events h2 {
+  color: var(--foreground) !important;
+  font-weight: 700;
+}
+
+.light #events h2 {
+  color: hsl(0 0% 6%) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dark #events h2 {
+  color: hsl(0 0% 98%) !important;
+}
+
+
+
+/* Additional UI Enhancements */
+.card-3d {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+  transform: translateY(-8px) rotateX(5deg);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Improved button hover effects */
+.btn-gold:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3);
+}
+
+/* Enhanced scroll behavior */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* Better mobile responsiveness */
+@media (max-width: 640px) {
+  .hero-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  
+  .glass-effect {
+    padding: 1rem;
+  }
+  
+  .btn-gold {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Improved loading animations */
+.animate-pulse-gentle {
+  animation: pulse-gentle 2s ease-in-out infinite;
+}
+
+@keyframes pulse-gentle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent-music);
+  outline-offset: 2px;
+}
+

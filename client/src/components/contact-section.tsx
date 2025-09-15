@@ -116,7 +116,7 @@ export default function ContactSection() {
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
           <div className="glass-effect p-8 rounded-xl">
-            <h3 className="font-display text-2xl font-semibold mb-6 text-accent">Send a Message</h3>
+            <h3 className="font-display text-2xl font-semibold mb-6 text-accent section-title">Send a Message</h3>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit, (errors) => {
                 // Handle validation errors, especially for reCAPTCHA
@@ -214,7 +214,7 @@ export default function ContactSection() {
           {/* Contact Info & Social */}
           <div className="space-y-8">
             <div className="glass-effect p-8 rounded-xl">
-              <h3 className="font-display text-2xl font-semibold mb-6 text-accent">Connect With Me</h3>
+              <h3 className="font-display text-2xl font-semibold mb-6 text-accent section-title">Connect With Me</h3>
               <div className="space-y-4">
                 <div className="flex items-center" data-testid="contact-email">
                   <Mail className="text-accent mr-4 w-6 h-6" />
@@ -232,7 +232,7 @@ export default function ContactSection() {
             </div>
             
             <div className="glass-effect p-8 rounded-xl">
-              <h3 className="font-display text-2xl font-semibold mb-6 text-accent">Follow My Journey</h3>
+              <h3 className="font-display text-2xl font-semibold mb-6 text-accent section-title">Follow My Journey</h3>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <a
