@@ -87,7 +87,7 @@ export const events = pgTable("events", {
   title: text("title").notNull(),
   description: text("description"),
   venue: text("venue").notNull(),
-  address: text("address"),
+  address: text("address").notNull(),
   eventDate: timestamp("event_date").notNull(),
   ticketUrl: text("ticket_url"),
   price: text("price"), // Free, $20, etc.
