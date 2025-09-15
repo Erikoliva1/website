@@ -145,7 +145,7 @@ export default function MusicTracksManager() {
               Add Track
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
                 {editingTrack ? "Edit Track" : "Add New Track"}
