@@ -79,7 +79,7 @@ export default function EventsSection() {
     <section id="events" className="py-20 bg-secondary" data-testid="events-section">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 section-title">Upcoming Events</h2>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 text-gradient">Upcoming Events</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Join me for live performances and musical experiences
           </p>
