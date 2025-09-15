@@ -43,7 +43,7 @@ export const musicTracks = pgTable("music_tracks", {
   title: text("title").notNull(),
   artist: text("artist").notNull().default("Prabhat Yadav"),
   language: text("language").notNull(), // Hindi, Bhojpuri, Nepali
-  spotifyId: text("spotify_id"), // Spotify track ID for embedding
+  spotifyId: text("spotify_id").notNull(), // Spotify track ID for embedding
   youtubeId: text("youtube_id"), // YouTube video ID
   description: text("description"),
   duration: integer("duration"), // duration in seconds
@@ -148,3 +148,4 @@ export type InsertGalleryImage = z.infer<typeof insertGalleryImageSchema>;
 
 export type Event = typeof events.$inferSelect;
 export type InsertEvent = z.infer<typeof insertEventSchema>;
+
