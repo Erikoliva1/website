@@ -127,7 +127,7 @@ export default function EventsManager() {
               Add Event
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
                 {editingEvent ? "Edit Event" : "Add Event"}
